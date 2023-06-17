@@ -1,6 +1,7 @@
 import discord
 import datetime
 from discord.ext import commands
+import re
 intents = discord.Intents.default()
 intents.typing = False
 intents.presences = False
@@ -47,17 +48,20 @@ async def on_message(message):
     
     print(f'{message.author} said "{message.content}" in {message.channel}')
 
+    pattern = r"\b(bot)\b"
     if isinstance(message.channel, discord.channel.DMChannel):
         await message.author.send(f'Okay I am a bot and have no clue what are you on. But I gotcha you said {message.content}')
 
-    elif str(message.content) == "!role" and str(message.author) == "SamShed#6912":
+    elif re.search(pattern, str(message.content), re.IGNORECASE) and str(message.author) != "natrium55#0":
+        await message.channel.send("Heard you are talking about me? Well Our handsome Boro Vai still working on me so be patient. Check the #just-for-bot-testing to do stuff")
+
+    elif str(message.content) == "!role" and str(message.channel) == "role-selection":
         await message.channel.send("Choose the roles below")
         sent = await message.channel.send("```Not available for gaming? react with 💤\n\nAvailable for gaming? react with 🎮```")
         emo_msg_id = sent.id        #Getting the em_msg_id
         print(f'The message id {emo_msg_id}')
         
-
-    elif (str(message.channel) == "just-for-bot-testing"):
+    elif str(message.channel) == "just-for-bot-testing":
         #print(f'the type of channel {type(message.channel)}')
         resp = response_server(message)
         await message.channel.send(resp)
@@ -115,9 +119,6 @@ async def on_raw_reaction_add(payload):
                     await user.remove_roles(current_role)
                     print(f"{user.display_name} left {current_role}")
 
-        
-
-
 @bot.event
 async def on_raw_reaction_remove(payload): 
     global guild_id
@@ -160,23 +161,24 @@ async def on_raw_reaction_remove(payload):
             await user.remove_roles(role)
             print(f"removed role '{role_name}' from {user.display_name}")
 
-
+#Helper channel, for responding to messages in server
 def response_server(message):
-    if str(message.content).lower() == "time":
+    message_lowercase = str(message.content).lower()
+    if message_lowercase == "time":
         current_datetime = datetime.datetime.now()
         formatted_time = current_datetime.strftime("%I:%M:%S %p")
         return f'Right now it is {formatted_time}'
     
-    elif str(message.content).lower() == "date":
+    elif message_lowercase == "date":
         current_datetime = datetime.datetime.now()
         formatted_date = current_datetime.strftime("%Y-%m-%d")
         return f'Today it is {formatted_date}'
     
-    elif str(message.content).lower() == "hello":
+    elif message_lowercase == "hello" or str(message.content).lower() == "hi":
         return f'Hey there how can I help you today?'
     
     else:
-        return f'Well this is my limit'
+        return f'I am at my Limit'
     
     '''elif str(message.content).lower() == "Members":
 
