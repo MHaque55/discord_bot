@@ -48,12 +48,9 @@ async def on_message(message):
     
     print(f'{message.author} said "{message.content}" in {message.channel}')
 
-    pattern = r"\b(bot)\b"
+   
     if isinstance(message.channel, discord.channel.DMChannel):
         await message.author.send(f'Okay I am a bot and have no clue what are you on. But I gotcha you said {message.content}')
-
-    elif re.search(pattern, str(message.content), re.IGNORECASE) and str(message.author) != "natrium55#0":
-        await message.channel.send("Heard you are talking about me? Well Our handsome Boro Vai still working on me so be patient. Check the #just-for-bot-testing to do stuff")
 
     elif str(message.content) == "!role" and str(message.channel) == "role-selection":
         await message.channel.send("Choose the roles below")
@@ -80,7 +77,6 @@ async def on_raw_reaction_add(payload):
         "🎮": "Pros",
         "💤": "Doesn't want to play"
     }
-
 
     print(f'{message_id} vs {emo_msg_id}')
     print(f'{guild_id2} vs {guild_id}')
@@ -121,8 +117,7 @@ async def on_raw_reaction_add(payload):
 
 @bot.event
 async def on_raw_reaction_remove(payload): 
-    global guild_id
-    global emo_msg_id
+    global guild_idls
     channel_id = payload.channel_id
     message_id = payload.message_id
     guild_id2 = payload.guild_id
@@ -180,19 +175,4 @@ def response_server(message):
     else:
         return f'I am at my Limit'
     
-    '''elif str(message.content).lower() == "Members":
-
-
-    elif str(message.content).lower() == 
-
-    elif str(message.content).lower() ==
-
-    elif str(message.content).lower() ==
-
-    elif str(message.content).lower() ==
-
-    elif str(message.content).lower() ==
-
-    elif str(message.content).lower() =='''
-
 bot.run(TOKEN)
