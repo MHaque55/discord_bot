@@ -58,7 +58,7 @@ async def on_message(message):
         emo_msg_id = sent.id        #Getting the em_msg_id
         print(f'The message id {emo_msg_id}')
         
-    else:
+    elif str(message.channel) == "just-for-bot-testing":
         #print(f'the type of channel {type(message.channel)}')
         resp = response_server(message)
         await message.channel.send(resp)
@@ -176,6 +176,9 @@ def response_server(message):
     
     elif message_lowercase == "hello bot" or str(message.content).lower() == "hi bot":
         return f'Hey there how can I help you today?'
+    
+    else:
+        return f'I am at my limit'
     
     
 bot.run(TOKEN)
