@@ -52,13 +52,13 @@ async def on_message(message):
     if isinstance(message.channel, discord.channel.DMChannel):
         await message.author.send(f'Okay I am a bot and have no clue what are you on. But I gotcha you said {message.content}')
 
-    elif str(message.content) == "!role" and str(message.channel) == "role-selection":
+    elif str(message.content) == "!role" and (str(message.channel) == "role-selection" or str(message.channel) == "just-for-bot-testing"):
         await message.channel.send("Choose the roles below")
         sent = await message.channel.send("```Not available for gaming? react with 💤\n\nAvailable for gaming? react with 🎮```")
         emo_msg_id = sent.id        #Getting the em_msg_id
         print(f'The message id {emo_msg_id}')
         
-    elif str(message.channel) == "just-for-bot-testing":
+    else:
         #print(f'the type of channel {type(message.channel)}')
         resp = response_server(message)
         await message.channel.send(resp)
@@ -110,7 +110,12 @@ async def on_raw_reaction_add(payload):
             print(f'{user.roles}')
             for current_role in user.roles:
                 print(f'current role = {current_role} and role = {role}')
-                if current_role != role and str(current_role) != '@everyone' and str(current_role) != 'Boro Vai':
+                if str(role) == "Pros" and str(current_role) == "Doesn\'t want to play":
+                    print(f'current role under if = {current_role}')
+                    await user.remove_roles(current_role)
+                    print(f"{user.display_name} left {current_role}")
+
+                elif str(role) == "Doesn\'t want to play" and str(current_role) == "Pros":
                     print(f'current role under if = {current_role}')
                     await user.remove_roles(current_role)
                     print(f"{user.display_name} left {current_role}")
@@ -169,10 +174,8 @@ def response_server(message):
         formatted_date = current_datetime.strftime("%Y-%m-%d")
         return f'Today it is {formatted_date}'
     
-    elif message_lowercase == "hello" or str(message.content).lower() == "hi":
+    elif message_lowercase == "hello bot" or str(message.content).lower() == "hi bot":
         return f'Hey there how can I help you today?'
     
-    else:
-        return f'I am at my Limit'
     
 bot.run(TOKEN)
