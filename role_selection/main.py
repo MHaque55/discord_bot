@@ -64,7 +64,6 @@ async def on_message(message):
         await message.channel.send(resp)
 
 
-
 @bot.event
 async def on_raw_reaction_add(payload):
     global guild_id
