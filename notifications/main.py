@@ -65,6 +65,7 @@ async def send_message():
     for video in videos_lbg:
         if video['videoId'] not in latest_lbg:
             latest_lbg.append(video['videoId'])
+            latest_lbg.pop(0)
             message = f"New LongBeachGriffy video:\nhttps://www.youtube.com/watch?v={video['videoId']}&ab_channel=LongBeachGriffy \n"
             await send_message_to_channel(message)
         break
@@ -72,6 +73,7 @@ async def send_message():
     for video in videos_442:
         if video['videoId'] not in latest_442:
             latest_442.append(video['videoId'])
+            latest_442.pop(0)
             message = f"New 442oons video:\nhttps://www.youtube.com/watch?v={video['videoId']}&ab_channel=442oons \n"
             await send_message_to_channel(message)
         break
@@ -79,6 +81,7 @@ async def send_message():
     for video in videos_espn:
         if video['videoId'] not in latest_espn:
             latest_espn.append(video['videoId'])
+            latest_espn.pop(0)
             message = f"New ESPN_FC video:\nhttps://www.youtube.com/watch?v={video['videoId']}&ab_channel=ESPNFC \n"
             await send_message_to_channel(message)
         break
@@ -86,6 +89,7 @@ async def send_message():
     for video in videos_ps:
         if video['videoId'] not in latest_ps:
             latest_ps.append(video['videoId'])
+            latest_ps.pop(0)
             message = f"New Playstation video:\nhttps://www.youtube.com/watch?v={video['videoId']}&ab_channel=PlayStation \n"
             await send_message_to_channel(message)
         break
