@@ -23,15 +23,16 @@ latest_lbg = []
 latest_442 = []
 latest_espn = []
 latest_ps = []
-channel_id: str
+channel_id_skits: str
+channel_id_sports: str
+channel_id_gaming: str
 
 bot = commands.Bot(command_prefix='!', intents=intents)
 
 
-
 @bot.event
 async def on_ready():
-    global channel_id
+    global channel_id_skits, channel_id_sports, channel_id_gaming
     guild_ct = 0
 
     print("Bot is online")
@@ -39,24 +40,32 @@ async def on_ready():
     for guild in bot.guilds:
         print(f'- {guild.id} (name: {guild.name})')
         guild_ct += 1
-        if str(guild.name) == "SamShed's server":
+        if str(guild.name) == "Homies":
             channels = guild.channels
 
     print(f'{bot.user} is now running and in {guild_ct} servers')
 
     for ch in channels:
         #print(f'This channel\'s name {ch.name}')
-        if str(ch.name) == "notify_content":
-            channel_id = ch.id
+        if str(ch.name) == "memes":
+            channel_id_skits = ch.id
             print(f'found the channel {ch.name} and it\'s id {ch.id}')
-            break
+            
+        elif str(ch.name) == "sports":
+            channel_id_sports = ch.id
+            print(f'found the channel {ch.name} and it\'s id {ch.id}')
+
+        elif str(ch.name) == "gaming-stuff":
+            channel_id_gaming = ch.id
+            print(f'found the channel {ch.name} and it\'s id {ch.id}')
+        
 
     send_message.start()
 
 @tasks.loop(seconds=120)
 async def send_message():
     global latest_lbg, latest_espn, latest_442, latest_ps
-    global channel_id
+    global channel_id_sports, channel_id_skits, channel_id_gaming
     videos_lbg = scrapetube.get_channel("UCWiY6fYdxuEe78r-0uFCnhA")
     videos_442 = scrapetube.get_channel("UC4SUUloEcrgjsxbmy_rQQXA")
     videos_espn = scrapetube.get_channel("UC6c1z7bA__85CIWZ_jpCK-Q")
@@ -68,7 +77,7 @@ async def send_message():
             if len(latest_lbg) > 1:
                 latest_lbg.pop(0)
             message = f"New LongBeachGriffy video:\nhttps://www.youtube.com/watch?v={video['videoId']}&ab_channel=LongBeachGriffy \n"
-            await send_message_to_channel(message)
+            await send_message_to_channel(message, channel_id_skits)
         break
 
     for video in videos_442:
@@ -77,7 +86,7 @@ async def send_message():
             if len(latest_442) > 1:
                 latest_442.pop(0)
             message = f"New 442oons video:\nhttps://www.youtube.com/watch?v={video['videoId']}&ab_channel=442oons \n"
-            await send_message_to_channel(message)
+            await send_message_to_channel(message, channel_id_skits)
         break
 
     for video in videos_espn:
@@ -86,7 +95,7 @@ async def send_message():
             if len(latest_espn) > 1:
                 latest_espn.pop(0)
             message = f"New ESPN_FC video:\nhttps://www.youtube.com/watch?v={video['videoId']}&ab_channel=ESPNFC \n"
-            await send_message_to_channel(message)
+            await send_message_to_channel(message, channel_id_sports)
         break
 
     for video in videos_ps:
@@ -95,17 +104,15 @@ async def send_message():
             if len(latest_ps) > 1:
                 latest_ps.pop(0)
             message = f"New Playstation video:\nhttps://www.youtube.com/watch?v={video['videoId']}&ab_channel=PlayStation \n"
-            await send_message_to_channel(message)
+            await send_message_to_channel(message, channel_id_gaming)
         break
 
 
-    
-async def send_message_to_channel(message):
-    global channel_id
+async def send_message_to_channel(message, channel_id):
+    #global channel_id
     print("It's on")
     channel = bot.get_channel(int(channel_id))
     if channel:
         await channel.send(message)
-
 
 bot.run(TOKEN)
