@@ -1,10 +1,14 @@
-import scrapetube
+import instaloader 
+import re
 
-latest = []
-videos = scrapetube.get_channel("UCWiY6fYdxuEe78r-0uFCnhA")
-
-for video in videos:
-    if video['videoId'] not in latest:
-        latest.append(video['videoId'])
-        print(f"youtube.com/watch?v={video['videoId']}&ab_channel=LongBeachGriffy")
+bot = instaloader.Instaloader() 
+profile1 = instaloader.Profile.from_username(bot.context, 'cristiano')
+profile2 = instaloader.Profile.from_username(bot.context, 'fabriziorom')
+for post in profile1.get_posts():
+    match = re.search(r'<Post\s+(\S+)>', str(post))
+    if match:
+        post_id = match.group(1)
+        print(f'fabrizio\'s new post: https://www.instagram.com/p/{post_id}/?hl=en')
+    else:
+        print("error")
     break

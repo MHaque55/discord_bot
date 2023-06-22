@@ -1,0 +1,5 @@
+app_ID = "793148345555203"
+app_secret = "e5fd901e3aa7cb6fe090f2128f2056e3"
+
+app_id = "256776010271467"
+insta_app_sec = "5952c0a1e0033121d303bb07ac1d54b1"
