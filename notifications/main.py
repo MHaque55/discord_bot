@@ -27,7 +27,7 @@ latest_beany = []
 latest_ps = []
 latest_caleb = []
 latest_tifo = []
-latest_fab_romano = []
+#latest_fab_romano = []
 latest_livehwg = []
 
 channel_id_skits: str
@@ -72,7 +72,7 @@ async def on_ready():
 @tasks.loop(seconds=120)
 async def send_message():
     global latest_lbg, latest_caleb, latest_442, latest_ps, latest_beany,latest_tifo
-    global latest_fab_romano, latest_livehwg
+    global latest_livehwg
     global channel_id_sports, channel_id_skits, channel_id_gaming
    
     
@@ -82,7 +82,7 @@ async def send_message():
     videos_ps = scrapetube.get_channel("UC-2Y8dQb0S6DtpxNgAKoJKA")
     videos_caleb = scrapetube.get_channel("UCI1XS_GkLGDOgf8YLaaXNRA")
     videos_tifo = scrapetube.get_channel("UC6ZMmQaL9wZYo4iLw8n8xiA")
-    insta_fabr = instaloader.Profile.from_username(insta_bot.context, 'fabriziorom')
+    #insta_fabr = instaloader.Profile.from_username(insta_bot.context, 'fabriziorom')
     insta_livehwg= instaloader.Profile.from_username(insta_bot.context, 'liveherewego')
 
 
@@ -140,22 +140,20 @@ async def send_message():
             await send_message_to_channel(message, channel_id_gaming)
         break
 
-    for post in insta_fabr.get_posts():
-        if post not in latest_fab_romano:
-            latest_fab_romano.append(post)
-            if len(latest_fab_romano) > 1:
-                latest_fab_romano.pop(0)
+    #for post in insta_fabr.get_posts():
+     #     if len(latest_fab_romano) > 1:
+      #          latest_fab_romano.pop(0)
 
-            match = re.search(r'<Post\s+(\S+)>', str(post))
-            if match:
-                post_id = match.group(1)
-                message = f"Fabrizio Romano\'s new post: https://www.instagram.com/p/{post_id}/?hl=en"
-                await send_message_to_channel(message, channel_id_sports)
+       #     match = re.search(r'<Post\s+(\S+)>', str(post))
+        #    if match:
+         #       post_id = match.group(1)
+          #      message = f"Fabrizio Romano\'s new post: https://www.instagram.com/p/{post_id}/?hl=en"
+           #     await send_message_to_channel(message, channel_id_sports)
                 
-            else:
-                print("error")
+            #else:
+             #   print("error")
                 
-        break
+        #break
 
     for post in insta_livehwg.get_posts():
         if post not in latest_livehwg:
