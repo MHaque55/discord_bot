@@ -1,6 +1,6 @@
 import discord
 import scrapetube
-import instaloader 
+#import instaloader 
 import re
 
 
@@ -18,8 +18,6 @@ intents.moderation = True
 
 TOKEN = "MTExOTg1Mjg1ODg1OTMzNTcxMg.G9lWmN.H4_6ciyxf_oXfar83e1uktlvveVakg4lFvTdZc"
 
-insta_bot = instaloader.Instaloader()
-
 
 latest_lbg = []
 latest_442 = []
@@ -28,7 +26,7 @@ latest_ps = []
 latest_caleb = []
 latest_tifo = []
 #latest_fab_romano = []
-latest_livehwg = []
+#latest_livehwg = []
 
 channel_id_skits: str
 channel_id_sports: str
@@ -82,8 +80,10 @@ async def send_message():
     videos_ps = scrapetube.get_channel("UC-2Y8dQb0S6DtpxNgAKoJKA")
     videos_caleb = scrapetube.get_channel("UCI1XS_GkLGDOgf8YLaaXNRA")
     videos_tifo = scrapetube.get_channel("UC6ZMmQaL9wZYo4iLw8n8xiA")
+    
+    #insta_bot = instaloader.Instaloader()
     #insta_fabr = instaloader.Profile.from_username(insta_bot.context, 'fabriziorom')
-    insta_livehwg= instaloader.Profile.from_username(insta_bot.context, 'liveherewego')
+    #insta_livehwg= instaloader.Profile.from_username(insta_bot.context, 'liveherewego')
 
 
     for video in videos_lbg:
@@ -155,20 +155,20 @@ async def send_message():
                 
         #break
 
-    for post in insta_livehwg.get_posts():
-        if post not in latest_livehwg:
-            latest_livehwg.append(post)
-            if len(latest_livehwg) > 1:
-                latest_livehwg.pop(0)
+    # for post in insta_livehwg.get_posts():
+    #     if post not in latest_livehwg:
+    #         latest_livehwg.append(post)
+    #         if len(latest_livehwg) > 1:
+    #             latest_livehwg.pop(0)
 
-            match = re.search(r'<Post\s+(\S+)>', str(post))
-            if match:
-                post_id = match.group(1)
-                message = f"Liveherewego posted something new: https://www.instagram.com/p/{post_id}/?hl=en"
-                await send_message_to_channel(message, channel_id_sports)
-            else:
-                print("error")
-        break
+    #         match = re.search(r'<Post\s+(\S+)>', str(post))
+    #         if match:
+    #             post_id = match.group(1)
+    #             message = f"Liveherewego posted something new: https://www.instagram.com/p/{post_id}/?hl=en"
+    #             await send_message_to_channel(message, channel_id_sports)
+    #         else:
+    #             print("error")
+    #     break
 
 
 async def send_message_to_channel(message, channel_id):
