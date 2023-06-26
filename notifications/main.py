@@ -25,6 +25,7 @@ latest_beany = []
 latest_ps = []
 latest_caleb = []
 latest_tifo = []
+latest_angryjoe = []
 #latest_fab_romano = []
 #latest_livehwg = []
 
@@ -69,8 +70,8 @@ async def on_ready():
 
 @tasks.loop(seconds=120)
 async def send_message():
-    global latest_lbg, latest_caleb, latest_442, latest_ps, latest_beany,latest_tifo
-    global latest_livehwg
+    global latest_lbg, latest_caleb, latest_442, latest_ps, latest_beany,latest_tifo, latest_angryjoe
+    #global latest_livehwg
     global channel_id_sports, channel_id_skits, channel_id_gaming
    
     
@@ -80,6 +81,7 @@ async def send_message():
     videos_ps = scrapetube.get_channel("UC-2Y8dQb0S6DtpxNgAKoJKA")
     videos_caleb = scrapetube.get_channel("UCI1XS_GkLGDOgf8YLaaXNRA")
     videos_tifo = scrapetube.get_channel("UC6ZMmQaL9wZYo4iLw8n8xiA")
+    videos_angryjoe = scrapetube.get_channel("UCsgv2QHkT2ljEixyulzOnUQ")
     
     #insta_bot = instaloader.Instaloader()
     #insta_fabr = instaloader.Profile.from_username(insta_bot.context, 'fabriziorom')
@@ -132,6 +134,8 @@ async def send_message():
         break
 
     for video in videos_ps:
+        print(video['videoId'])
+        print(f'latest ps: {latest_ps}')
         if video['videoId'] not in latest_ps:
             latest_ps.append(video['videoId'])
             if len(latest_ps) > 1:
@@ -140,6 +144,15 @@ async def send_message():
             await send_message_to_channel(message, channel_id_gaming)
         break
 
+    for video in videos_angryjoe:
+        if video['videoId'] not in latest_angryjoe:
+            latest_angryjoe.append(video['videoId'])
+            if len(latest_angryjoe) > 1:
+                latest_angryjoe.pop(0)
+            message = f"New AngryJoeShow video:\nhttps://www.youtube.com/watch?v={video['videoId']}&ab_channel=AngryJoeShow \n"
+            await send_message_to_channel(message, channel_id_gaming)
+        break
+        
     #for post in insta_fabr.get_posts():
      #     if len(latest_fab_romano) > 1:
       #          latest_fab_romano.pop(0)
