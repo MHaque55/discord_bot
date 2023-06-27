@@ -45,7 +45,7 @@ async def on_ready():
     for guild in bot.guilds:
         print(f'- {guild.id} (name: {guild.name})')
         guild_ct += 1
-        if str(guild.name) == "Homies":
+        if str(guild.name) == "SamShed's server":
             channels = guild.channels
 
     print(f'{bot.user} is now running and in {guild_ct} servers')
