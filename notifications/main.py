@@ -67,7 +67,7 @@ async def on_ready():
 
     send_message.start()
 
-@tasks.loop(seconds=120)
+@tasks.loop(seconds=10)
 async def send_message():
     global latest_lbg, latest_caleb, latest_442, latest_ps, latest_beany,latest_tifo, latest_angryjoe
     #global latest_livehwg
@@ -94,7 +94,7 @@ async def send_message():
                 latest_lbg.pop(0)
             message = f"New LongBeachGriffy video:\nhttps://www.youtube.com/watch?v={video['videoId']}&ab_channel=LongBeachGriffy \n"
             await send_message_to_channel(message, channel_id_skits)
-            break
+        break
 
     for video in videos_caleb:
         if video['videoId'] not in latest_caleb:
@@ -103,7 +103,7 @@ async def send_message():
                 latest_caleb.pop(0)
             message = f"New Calebcity video:\nhttps://www.youtube.com/watch?v={video['videoId']}&ab_channel=CalebCity \n"
             await send_message_to_channel(message, channel_id_skits)
-            break
+        break
     
     for video in videos_442:
         if video['videoId'] not in latest_442:
@@ -112,7 +112,7 @@ async def send_message():
                 latest_442.pop(0)
             message = f"New 442oons video:\nhttps://www.youtube.com/watch?v={video['videoId']}&ab_channel=442oons \n"
             await send_message_to_channel(message, channel_id_skits)
-            break
+        break
 
     for video in videos_beany:
         if video['videoId'] not in latest_beany:
@@ -121,7 +121,7 @@ async def send_message():
                 latest_beany.pop(0)
             message = f"New BeanymanSports video:\nhttps://www.youtube.com/watch?v={video['videoId']}&ab_channel=BeanymanSports \n"
             await send_message_to_channel(message, channel_id_sports)
-            break
+        break
 
     for video in videos_tifo:
         if video['videoId'] not in latest_tifo:
@@ -130,18 +130,21 @@ async def send_message():
                 latest_tifo.pop(0)
             message = f"New Tifo IRL video:\nhttps://www.youtube.com/watch?v={video['videoId']}&ab_channel=TifoIRL \n"
             await send_message_to_channel(message, channel_id_sports)
-            break
+        break
 
     for video in videos_ps:
         print(video['videoId'])
         print(f'latest ps: {latest_ps}')
         if video['videoId'] not in latest_ps:
             latest_ps.append(video['videoId'])
+            print(f'latest ps after appending: {latest_ps}')
             if len(latest_ps) > 1:
+                print("ps going here")
                 latest_ps.pop(0)
+                print(f'latest ps after popping: {latest_ps}')
             message = f"New Playstation video:\nhttps://www.youtube.com/watch?v={video['videoId']}&ab_channel=PlayStation \n"
             await send_message_to_channel(message, channel_id_gaming)
-            break
+        break
 
     for video in videos_angryjoe:
         if video['videoId'] not in latest_angryjoe:
@@ -150,7 +153,7 @@ async def send_message():
                 latest_angryjoe.pop(0)
             message = f"New AngryJoeShow video:\nhttps://www.youtube.com/watch?v={video['videoId']}&ab_channel=AngryJoeShow \n"
             await send_message_to_channel(message, channel_id_gaming)
-            break
+        break
         
     #for post in insta_fabr.get_posts():
      #     if len(latest_fab_romano) > 1:
