@@ -25,6 +25,7 @@ latest_ps = []
 latest_caleb = []
 latest_tifo = []
 latest_angryjoe = []
+
 #latest_fab_romano = []
 #latest_livehwg = []
 
@@ -77,10 +78,13 @@ async def send_message():
     videos_lbg = scrapetube.get_channel("UCWiY6fYdxuEe78r-0uFCnhA")
     videos_442 = scrapetube.get_channel("UC4SUUloEcrgjsxbmy_rQQXA")
     videos_beany = scrapetube.get_channel("UCiVg6vRhuyjsWgHkDNOig6A")
-    videos_ps = scrapetube.get_channel("UC-2Y8dQb0S6DtpxNgAKoJKA")
+    #videos_ps = scrapetube.get_channel("UC-2Y8dQb0S6DtpxNgAKoJKA")
+    videos_ps = scrapetube.get_channel("UC6c1z7bA__85CIWZ_jpCK-Q")
     videos_caleb = scrapetube.get_channel("UCI1XS_GkLGDOgf8YLaaXNRA")
     videos_tifo = scrapetube.get_channel("UC6ZMmQaL9wZYo4iLw8n8xiA")
-    videos_angryjoe = scrapetube.get_channel("UCsgv2QHkT2ljEixyulzOnUQ")
+    #videos_angryjoe = scrapetube.get_channel("UCsgv2QHkT2ljEixyulzOnUQ")
+    videos_angryjoe = scrapetube.get_channel("UCKy1dAqELo0zrOtPkf0eTMw")
+    
     
     #insta_bot = instaloader.Instaloader()
     #insta_fabr = instaloader.Profile.from_username(insta_bot.context, 'fabriziorom')
@@ -142,7 +146,8 @@ async def send_message():
                 print("ps going here")
                 latest_ps.pop(0)
                 print(f'latest ps after popping: {latest_ps}')
-            message = f"New Playstation video:\nhttps://www.youtube.com/watch?v={video['videoId']}&ab_channel=PlayStation \n"
+            #message = f"New Playstation video:\nhttps://www.youtube.com/watch?v={video['videoId']}&ab_channel=PlayStation \n"
+            message = f"New Playstation video:\nhttps://www.youtube.com/watch?v={video['videoId']}&ab_channel=ESPNFC \n"
             await send_message_to_channel(message, channel_id_gaming)
         break
 
@@ -151,7 +156,8 @@ async def send_message():
             latest_angryjoe.append(video['videoId'])
             if len(latest_angryjoe) > 1:
                 latest_angryjoe.pop(0)
-            message = f"New AngryJoeShow video:\nhttps://www.youtube.com/watch?v={video['videoId']}&ab_channel=AngryJoeShow \n"
+            #message = f"New AngryJoeShow video:\nhttps://www.youtube.com/watch?v={video['videoId']}&ab_channel=AngryJoeShow \n"
+            message = f"New AngryJoeShow video:\nhttps://www.youtube.com/watch?v={video['videoId']}&ab_channel=IGN \n"
             await send_message_to_channel(message, channel_id_gaming)
         break
         
