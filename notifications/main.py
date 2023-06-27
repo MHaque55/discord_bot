@@ -67,7 +67,7 @@ async def on_ready():
 
     send_message.start()
 
-@tasks.loop(seconds=120)
+@tasks.loop(seconds=300)
 async def send_message():
     global latest_lbg, latest_caleb, latest_442, latest_ps, latest_beany,latest_tifo, latest_angryjoe
     #global latest_livehwg
