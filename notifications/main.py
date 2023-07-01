@@ -21,13 +21,13 @@ TOKEN = "MTExOTg1Mjg1ODg1OTMzNTcxMg.G9lWmN.H4_6ciyxf_oXfar83e1uktlvveVakg4lFvTdZ
 latest_lbg = []
 latest_442 = []
 latest_beany = []
-latest_ps = []
 latest_caleb = []
 latest_tifo = []
-latest_angryjoe = []
+latest_lenarr = [] #LenarrYoung, UCrA2bqOHwjX1DxgP9CaVJzw
+latest_ninja = []
+#latest_ps = []
+#latest_angryjoe = []
 
-#latest_fab_romano = []
-#latest_livehwg = []
 
 channel_id_skits: str
 channel_id_sports: str
@@ -46,7 +46,7 @@ async def on_ready():
     for guild in bot.guilds:
         print(f'- {guild.id} (name: {guild.name})')
         guild_ct += 1
-        if str(guild.name) == "SamShed's server":
+        if str(guild.name) == "Homies":       #Homies, SamShed's server
             channels = guild.channels
 
     print(f'{bot.user} is now running and in {guild_ct} servers')
@@ -70,26 +70,36 @@ async def on_ready():
 
 @tasks.loop(seconds=300)
 async def send_message():
-    global latest_lbg, latest_caleb, latest_442, latest_ps, latest_beany,latest_tifo, latest_angryjoe
-    #global latest_livehwg
+    global latest_lbg, latest_caleb, latest_442, latest_beany,latest_tifo, latest_lenarr, latest_ninja
+    #global latest_livehwg, latest_ps, latest_ps,
     global channel_id_sports, channel_id_skits, channel_id_gaming
    
-    
+    videos_lenarr = scrapetube.get_channel("UCrA2bqOHwjX1DxgP9CaVJzw")
     videos_lbg = scrapetube.get_channel("UCWiY6fYdxuEe78r-0uFCnhA")
     videos_442 = scrapetube.get_channel("UC4SUUloEcrgjsxbmy_rQQXA")
     videos_beany = scrapetube.get_channel("UCiVg6vRhuyjsWgHkDNOig6A")
-    #videos_ps = scrapetube.get_channel("UC-2Y8dQb0S6DtpxNgAKoJKA")
-    videos_ps = scrapetube.get_channel("UC6c1z7bA__85CIWZ_jpCK-Q")
     videos_caleb = scrapetube.get_channel("UCI1XS_GkLGDOgf8YLaaXNRA")
     videos_tifo = scrapetube.get_channel("UC6ZMmQaL9wZYo4iLw8n8xiA")
+    videos_ninja =  scrapetube.get_channel("UCAW-NpUFkMyCNrvRSSGIvDQ")
+    #videos_ps = scrapetube.get_channel("UC-2Y8dQb0S6DtpxNgAKoJKA")
+    #videos_ps = scrapetube.get_channel("UC6c1z7bA__85CIWZ_jpCK-Q")
     #videos_angryjoe = scrapetube.get_channel("UCsgv2QHkT2ljEixyulzOnUQ")
-    videos_angryjoe = scrapetube.get_channel("UCKy1dAqELo0zrOtPkf0eTMw")
+    #videos_angryjoe = scrapetube.get_channel("UCKy1dAqELo0zrOtPkf0eTMw")
     
     
     #insta_bot = instaloader.Instaloader()
     #insta_fabr = instaloader.Profile.from_username(insta_bot.context, 'fabriziorom')
     #insta_livehwg= instaloader.Profile.from_username(insta_bot.context, 'liveherewego')
 
+    
+    for video in videos_lenarr:
+        if video['videoId'] not in latest_lenarr:
+            latest_lenarr.append(video['videoId'])
+            if len(latest_lenarr) > 1:
+                latest_lenarr.pop(0)
+            message = f"New Lenarr Young video:\nhttps://www.youtube.com/watch?v={video['videoId']}&ab_channel=LenarrYoung \n"
+            await send_message_to_channel(message, channel_id_skits)
+        break
 
     for video in videos_lbg:
         if video['videoId'] not in latest_lbg:
@@ -136,30 +146,39 @@ async def send_message():
             await send_message_to_channel(message, channel_id_sports)
         break
 
-    for video in videos_ps:
-        print(video['videoId'])
-        print(f'latest ps: {latest_ps}')
-        if video['videoId'] not in latest_ps:
-            latest_ps.append(video['videoId'])
-            print(f'latest ps after appending: {latest_ps}')
-            if len(latest_ps) > 1:
-                print("ps going here")
-                latest_ps.pop(0)
-                print(f'latest ps after popping: {latest_ps}')
-            #message = f"New Playstation video:\nhttps://www.youtube.com/watch?v={video['videoId']}&ab_channel=PlayStation \n"
-            message = f"New Playstation video:\nhttps://www.youtube.com/watch?v={video['videoId']}&ab_channel=ESPNFC \n"
+    for video in videos_ninja:
+        if video['videoId'] not in latest_ninja:
+            latest_ninja.append(video['videoId'])
+            if len(latest_ninja) > 1:
+                latest_ninja.pop(0)
+            message = f"New Ninja video:\nhttps://www.youtube.com/watch?v={video['videoId']}&ab_channel=Ninja \n"
             await send_message_to_channel(message, channel_id_gaming)
         break
 
-    for video in videos_angryjoe:
-        if video['videoId'] not in latest_angryjoe:
-            latest_angryjoe.append(video['videoId'])
-            if len(latest_angryjoe) > 1:
-                latest_angryjoe.pop(0)
-            #message = f"New AngryJoeShow video:\nhttps://www.youtube.com/watch?v={video['videoId']}&ab_channel=AngryJoeShow \n"
-            message = f"New AngryJoeShow video:\nhttps://www.youtube.com/watch?v={video['videoId']}&ab_channel=IGN \n"
-            await send_message_to_channel(message, channel_id_gaming)
-        break
+    # for video in videos_ps:
+    #     print(video['videoId'])
+    #     print(f'latest ps: {latest_ps}')
+    #     if video['videoId'] not in latest_ps:
+    #         latest_ps.append(video['videoId'])
+    #         print(f'latest ps after appending: {latest_ps}')
+    #         if len(latest_ps) > 1:
+    #             print("ps going here")
+    #             latest_ps.pop(0)
+    #             print(f'latest ps after popping: {latest_ps}')
+    #         #message = f"New Playstation video:\nhttps://www.youtube.com/watch?v={video['videoId']}&ab_channel=PlayStation \n"
+    #         message = f"New Playstation video:\nhttps://www.youtube.com/watch?v={video['videoId']}&ab_channel=ESPNFC \n"
+    #         await send_message_to_channel(message, channel_id_gaming)
+    #     break
+
+    # for video in videos_angryjoe:
+    #     if video['videoId'] not in latest_angryjoe:
+    #         latest_angryjoe.append(video['videoId'])
+    #         if len(latest_angryjoe) > 1:
+    #             latest_angryjoe.pop(0)
+    #         #message = f"New AngryJoeShow video:\nhttps://www.youtube.com/watch?v={video['videoId']}&ab_channel=AngryJoeShow \n"
+    #         message = f"New AngryJoeShow video:\nhttps://www.youtube.com/watch?v={video['videoId']}&ab_channel=IGN \n"
+    #         await send_message_to_channel(message, channel_id_gaming)
+    #     break
         
     #for post in insta_fabr.get_posts():
      #     if len(latest_fab_romano) > 1:

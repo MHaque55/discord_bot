@@ -55,7 +55,7 @@ async def on_ready():
 
     send_message.start()
 
-@tasks.loop(seconds=60)
+@tasks.loop(seconds=60*60*24)
 async def send_message():
     global birthdays, channel_id
     current_date = datetime.date.today()
