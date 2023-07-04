@@ -23,7 +23,7 @@ birthdays = {"01/21": "Atif",
              "07/06": "Dr. Rafeen",
              "08/07": "Sanaf",
              "09/08": "Sir Nafee",
-             "10/01": "Prova",
+             "10/01": "Prova Apu",
              "10/21": "Ahiyaaaaan",
              "11/08": "Siara",
              "11/18": "Sabeen",
@@ -42,7 +42,7 @@ async def on_ready():
     for guild in bot.guilds:
         print(f'- {guild.id} (name: {guild.name})')
         guild_ct += 1
-        if str(guild.name) == "SamShed's server":
+        if str(guild.name) == "Homies":
             channels = guild.channels
 
     print(f'{bot.user} is now running and in {guild_ct} servers')
@@ -62,7 +62,7 @@ async def send_message():
     formatted_date = current_date.strftime("%m/%d")
     print(f'today is {formatted_date}')
     if formatted_date in birthdays:
-        message = f'Today is {birthdays[formatted_date]}\'s birthday, don\'t forget to wish him/her and get treat from them'
+        message = f'Today is {birthdays[formatted_date]}\'s birthday, don\'t forget to wish him/her'
         channel = bot.get_channel(int(channel_id))
         if channel:
             await channel.send(message)
