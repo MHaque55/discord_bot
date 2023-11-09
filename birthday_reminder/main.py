@@ -13,7 +13,6 @@ intents.reactions = True
 intents.moderation = True
 
 bot = commands.Bot(command_prefix='!', intents=intents)
-TOKEN = "MTEyMzAzNDAxNTY3OTY1NjEwNw.GHAhzl.HQ1TTa-5LGUme1KPYQKZmc3UnTKHgB8DdZOK8U"
 
 birthdays = {"01/21": "Atif",
              "02/19": "Iram" ,

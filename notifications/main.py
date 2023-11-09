@@ -16,7 +16,6 @@ intents.emojis_and_stickers = True
 intents.reactions = True
 intents.moderation = True
 
-TOKEN = "MTExOTg1Mjg1ODg1OTMzNTcxMg.G9lWmN.H4_6ciyxf_oXfar83e1uktlvveVakg4lFvTdZc"
 
 latest_lbg = []
 latest_442 = []

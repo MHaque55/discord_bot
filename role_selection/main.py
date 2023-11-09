@@ -18,7 +18,6 @@ intents.moderation = True
 bot = discord.Client(intents=intents)
 bot2 = commands.Bot(command_prefix='!', intents=intents)
 
-TOKEN = 'MTExMzEzMTY2NDQyMDM5MzAxMA.Ges2Nz.WRgvJta4FCc-cuBqTFG4xyYJqGzh4U118tHT7k'
 
 #get the message id and guild id for the emoji role selector also the author
 emo_msg_id = None
